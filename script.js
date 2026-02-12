@@ -1,27 +1,15 @@
 const CONFIG = {
     growthFactor: 1.6,
-    displayTime: 6000, // Duration each slide stays visible
-    fadeTime: 2000,    // Duration of the fade transition (matching CSS)
-    burstCount: 80,
+    displayTime: 9000, 
+    fadeTime: 2000,    
+    burstCount: 0,     
     infiniteRate: 150,
-    roses: ["🌹", "🥀", "🌹", "🌷", "🌹"],
-    noMessages: ["Are you sure?", "Pookie please...", "Don't do this! 💔"],
+    roses: ["🌹", "🌹", "🌷", "🌹"],
+    noMessages: ["No?", "wtf u no lub me or som?", "fuck u","just click yes honey","or u want something else 😏"],
     yesSequence: [
-        { 
-            text: "Knew you would say yes!", 
-            img: "/gifs/two.mp4", 
-            bg: "images/sitting.png" 
-        },
-        { 
-            text: "I have so many things planned!", 
-            img: "/gifs/three.mp4", 
-            bg: "images/bg2.jpg" 
-        },
-        { 
-            text: "You're the best! ❤️", 
-            img: "/gifs/four.mp4", 
-            bg: "images/bg3.jpg" 
-        }
+        { text: "I lobbb uuuu honayyy!!!! My Sayang", img: "/gifs/fish.mp4", },
+        { text: "I have so many things planned!", img: "/gifs/three.mp4" },
+        { text: "You're the best! ❤️", img: "/gifs/four.mp4" }
     ],
     finalMessage: "Forever yours! 🌹",
     finalBg: "images/final.jpg"
@@ -29,6 +17,40 @@ const CONFIG = {
 
 let noClickCount = 0;
 let heartsActive = true;
+let musicStarted = false;
+
+// New function to handle the opening click
+function openMessage() {
+    playMusic(); // Starts music on the first click
+
+    const openingScreen = document.getElementById('opening-screen');
+    const questionContainer = document.getElementById('question-container');
+
+    openingScreen.classList.add('fade-out');
+
+    setTimeout(() => {
+        openingScreen.style.display = 'none';
+        questionContainer.style.display = 'block';
+        
+        // Gentle fade in for the question
+        questionContainer.style.opacity = "0";
+        setTimeout(() => {
+            questionContainer.style.transition = "opacity 1s ease";
+            questionContainer.style.opacity = "1";
+        }, 50);
+    }, 1000); 
+}
+
+function playMusic() {
+    if (!musicStarted) {
+        const music = document.getElementById('bg-music');
+        if (music) {
+            music.volume = 0.5;
+            music.play().catch(e => console.log("Audio blocked:", e));
+            musicStarted = true;
+        }
+    }
+}
 
 function handleNoClick() {
     const noBtn = document.querySelector('.no-button');
@@ -46,7 +68,6 @@ function handleYesClick() {
 
     displayContainer.style.display = 'block';
     
-    // Initial fade in for the first slide
     setTimeout(() => {
         displayContainer.style.opacity = 1;
         if (bgOverlay) bgOverlay.style.opacity = 0.5;
@@ -67,7 +88,6 @@ function startSlideshow() {
         if (index < CONFIG.yesSequence.length) {
             messageEl.textContent = CONFIG.yesSequence[index].text;
             sourceEl.src = CONFIG.yesSequence[index].img;
-            if (bgOverlay) bgOverlay.style.backgroundImage = `url('${CONFIG.yesSequence[index].bg}')`;
             videoEl.load();
             videoEl.play();
         } else {
@@ -77,23 +97,17 @@ function startSlideshow() {
         }
     };
 
-    // Initial load
     updateContent(0);
 
     const loop = setInterval(() => {
         step++;
-        
-        // 1. Start Fade Out
         displayContainer.style.opacity = 0;
-        if (bgOverlay) bgOverlay.style.opacity = 0;
 
-        // 2. Wait for fade out to finish (fadeTime) then update content
         setTimeout(() => {
             updateContent(step);
-            
-            // 3. Start Fade In
-            displayContainer.style.opacity = 1;
-            if (bgOverlay) bgOverlay.style.opacity = 0.5;
+            setTimeout(() => {
+                displayContainer.style.opacity = 1;
+            }, 50);
             
             if (step >= CONFIG.yesSequence.length) clearInterval(loop);
         }, CONFIG.fadeTime);
@@ -108,20 +122,6 @@ function triggerEndgame() {
     
     const container = document.getElementById('flower-container');
 
-    // Burst effect
-    for (let i = 0; i < CONFIG.burstCount; i++) {
-        const f = document.createElement('div');
-        f.className = 'flower burst-flower';
-        f.innerHTML = CONFIG.roses[Math.floor(Math.random() * CONFIG.roses.length)];
-        const angle = Math.random() * Math.PI * 2;
-        const dist = 150 + Math.random() * 600;
-        f.style.setProperty('--tw', `${Math.cos(angle) * dist}px`);
-        f.style.setProperty('--th', `${Math.sin(angle) * dist}px`);
-        container.appendChild(f);
-        f.addEventListener('animationend', () => f.remove());
-    }
-
-    // Infinite falling roses
     setInterval(() => {
         const f = document.createElement('div');
         f.className = 'flower falling-flower';
@@ -151,7 +151,6 @@ function spawnHeart(container) {
     if (random > 0.4) {
         el = document.createElement('img');
         el.className = "flag-heart";
-        // Alternating between PK and ID flags as in your original
         if (Math.random() > 0.4) {
             el.src = "https://flagcdn.com/w320/pk.png";
             el.style.backgroundColor = "#006600";
