@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siddyyy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="bg-overlay"></div>
+
+    <svg width="0" height="0" style="position:absolute;">
+        <defs>
+            <clipPath id="heartClip" clipPathUnits="objectBoundingBox">
+                <path d="M0.5,0.88 L0.43,0.82 C0.19,0.6 0.06,0.48 0.06,0.34 C0.06,0.21 0.16,0.12 0.28,0.12 C0.35,0.12 0.42,0.15 0.46,0.2 C0.48,0.15 0.55,0.12 0.62,0.12 C0.74,0.12 0.84,0.21 0.84,0.34 C0.84,0.48 0.71,0.6 0.47,0.82 L0.5,0.88 Z"></path>
+            </clipPath>
+        </defs>
+    </svg>
+
+    <div id="heart-background"></div>
+    <div id="flower-container"></div>
+
+    <div id="question-container" class="container">
+        <h1 id="main-title">Habibi would you like to become my Valentine?</h1>
+        <div class="buttons">
+            <button class="yes-button romantic-btn" onclick="handleYesClick()">Yes</button>
+            <button class="no-button romantic-btn" onclick="handleNoClick()">No</button>
+        </div>
+        <div class="gif_container">
+            <video autoplay loop muted playsinline class="video-media">
+                <source src="/gifs/one.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <div id="display-container" class="container" style="display: none; opacity: 0;">
+        <h1 id="timed-message" class="header_text"></h1>
+        <div class="gif_container">
+            <video id="timed-video" autoplay loop muted playsinline class="video-media">
+                <source id="video-source" src="" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: radial-gradient(circle, #fff0f0 0%, #f9e3e3 100%);
+    font-family: 'Kalam', cursive; 
+    overflow: hidden; 
+}
+
+#bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    opacity: 0;
+    /* Smooth 2-second ease-in-out fade */
+    transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: brightness(0.7) blur(4px);
+}
+
+/* Added transition here so the text/video fades with the background */
+#display-container {
+    transition: opacity 2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center; 
+    z-index: 10; 
+    position: relative;
+}
+
+.container { text-align: center; z-index: 10; position: relative; }
+
+#main-title, .header_text {
+    font-family: 'Cookie', cursive;
+    font-size: 4em;
+    color: #ff758c;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+}
+
+.gif_container video {
+    max-width: 90%;
+    max-height: 400px;
+    border-radius: 20px;
+    margin-top: 25px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    object-fit: cover;
+    background: transparent;
+}
+
+.romantic-btn {
+    font-family: 'Kalam', cursive;
+    font-size: 1.6em;
+    padding: 12px 35px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.yes-button {
+    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+    color: white;
+    margin-right: 20px;
+    animation: heartbeat 1.5s infinite;
+}
+
+.no-button {
+    background-color: #ffffff;
+    color: #ff758c;
+    border: 2px solid #ff758c;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#heart-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+.flag-heart {
+    position: absolute;
+    bottom: -80px;
+    clip-path: url(#heartClip);
+    object-fit: cover;
+    object-position: 70% center;
+    opacity: 0.9;
+    animation: floatUp var(--duration) linear forwards;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -80px;
+    fill: #ffb3c1;
+    opacity: 0.5;
+    animation: floatUp var(--duration) linear forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    100% { transform: translateY(-120vh) translateX(var(--sway)) rotate(var(--rotation)); opacity: 0; }
+}
+
+.flower { position: absolute; pointer-events: none; z-index: 5; font-size: 2.5rem; }
+.burst-flower { top: 50%; left: 50%; animation: burst 3s ease-out forwards; }
+
+@keyframes burst {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    100% { transform: translate(var(--tw), var(--th)) scale(1.2); opacity: 0; }
+}
+
+.falling-flower { top: -10%; animation: fall var(--speed) linear forwards; }
+
+@keyframes fall {
+    0% { transform: translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
