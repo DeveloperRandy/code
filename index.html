@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siddyyy</title>
+    <title>For My Sayang</title>
     <link href="https://fonts.googleapis.com/css2?family=Cookie&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -43,16 +43,32 @@
 
     <div id="display-container" class="container" style="display: none; opacity: 0;">
         <h1 id="timed-message" class="header_text"></h1>
-        <div class="gif_container">
+        
+        <div id="love-scale-container" style="display: none;">
+            <p style="font-size: 1.8em; color: #ff758c; margin-bottom: 20px;">On a scale of 1 to 10... how much?</p>
+            <div class="scale-grid">
+                <button class="romantic-btn yes-button scale-btn" onclick="submitLoveScale(6)">A million</button>
+                <button class="romantic-btn yes-button scale-btn" onclick="submitLoveScale(7)">A Billion</button>
+                <button class="romantic-btn yes-button scale-btn" onclick="submitLoveScale(8)">A Trillion</button>
+                <button class="romantic-btn yes-button scale-btn" onclick="submitLoveScale(9)">A Quadrillion</button>
+                <button class="romantic-btn yes-button scale-btn" onclick="submitLoveScale(10)">A Quintillion</button>
+                <button class="romantic-btn yes-button scale-btn" onclick="submitLoveScale(10)">A Sextillion😉</button>
+            </div>
+        </div>
+
+        <div id="main-media-wrapper" class="gif_container">
             <video id="timed-video" autoplay loop muted playsinline class="video-media">
                 <source id="video-source" src="" type="video/mp4">
             </video>
+        </div>
+
+        <div id="gallery-container" style="display: none;">
+            <div class="memory-grid" id="memory-grid"></div>
         </div>
     </div>
 
     <audio id="bg-music" loop>
         <source src="merijaan.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
     </audio>
 
     <script src="script.js"></script>
